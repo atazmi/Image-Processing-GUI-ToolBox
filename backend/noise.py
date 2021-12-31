@@ -19,7 +19,7 @@ def gaussianNoise(image, mean=0, var=0.001):
     return out
 
 
-def add_periodic_noise(image, A=100, u0=90, v0=50):
+def add_periodic_noise(image, A=200, u0=45, v0=50):
     '''
             A: amplitude - int.
             u0: angle 

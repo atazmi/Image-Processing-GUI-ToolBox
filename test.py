@@ -7,6 +7,12 @@ from backend.filters import *
 
 img = cv2.imread("Images/building.jpg")
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+cv2.imshow("grey", img_gray)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
 '''
 histr = calculateHistogram(img)
 
@@ -54,16 +60,35 @@ cv2.destroyAllWindows()
 #
 #
 #
-# img_with_periodic_noise = add_periodic_noise(img_gray)
-# cv2.imshow("img_with_periodic_noise", img_with_periodic_noise)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+img_with_periodic_noise = add_periodic_noise(img_gray)
+cv2.imshow("img_with_periodic_noise", img_with_periodic_noise)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
-salt_and_pepper_img = add_salt_and_pepper_noise(img, 0.30, 0.8)
-plt.subplot(1, 3, 1)
-plt.imshow(salt_and_pepper_img)
-plt.subplot(1, 3, 2)
-plt.imshow(median_filter(salt_and_pepper_img,  5))
-plt.subplot(1, 3, 3)
-plt.imshow(averaging_filter(salt_and_pepper_img,  5, 5))
-plt.show()
+# salt_and_pepper_img = add_salt_and_pepper_noise(img, 0.30, 0.8)
+# plt.subplot(1, 3, 1)
+# plt.imshow(salt_and_pepper_img)
+# plt.subplot(1, 3, 2)
+# plt.imshow(median_filter(salt_and_pepper_img,  5))
+# plt.subplot(1, 3, 3)
+# plt.imshow(averaging_filter(salt_and_pepper_img,  5, 5))
+# plt.show()
+
+
+filtered_image = band_filter(img_with_periodic_noise)
+cv2.imwrite('image_filtered_with_band_filter.jpg', filtered_image)
+image_filtered_with_notch = cv2.imread("image_filtered_with_band_filter.jpg")
+cv2.imshow("image_filtered_with_band_filter", image_filtered_with_notch)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+
+filtered_image = notch_filter(img_with_periodic_noise)
+cv2.imwrite('image_filtered_with_notch.jpg', filtered_image)
+image_filtered_with_notch = cv2.imread("image_filtered_with_notch.jpg")
+cv2.imshow("image_filtered_with_notch", image_filtered_with_notch)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
