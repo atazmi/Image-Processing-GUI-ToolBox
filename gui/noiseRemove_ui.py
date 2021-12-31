@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_filterDialog(object):
-    def setupUi(self, filterDialog):
-        filterDialog.setObjectName("filterDialog")
-        filterDialog.resize(1129, 397)
-        self.tabs = QtWidgets.QTabWidget(filterDialog)
+class Ui_noiseRemoveDialog(object):
+    def setupUi(self, noiseRemoveDialog):
+        noiseRemoveDialog.setObjectName("noiseRemoveDialog")
+        noiseRemoveDialog.resize(1129, 397)
+        self.tabs = QtWidgets.QTabWidget(noiseRemoveDialog)
         self.tabs.setGeometry(QtCore.QRect(10, 10, 541, 361))
         self.tabs.setObjectName("tabs")
         self.tab = QtWidgets.QWidget()
@@ -33,7 +33,7 @@ class Ui_filterDialog(object):
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
         self.tabs.addTab(self.tab_4, "")
-        self.filteredImage_label = QtWidgets.QLabel(filterDialog)
+        self.filteredImage_label = QtWidgets.QLabel(noiseRemoveDialog)
         self.filteredImage_label.setGeometry(QtCore.QRect(560, 30, 550, 340))
         self.filteredImage_label.setFrameShape(QtWidgets.QFrame.Box)
         self.filteredImage_label.setFrameShadow(QtWidgets.QFrame.Sunken)
@@ -41,16 +41,16 @@ class Ui_filterDialog(object):
         self.filteredImage_label.setAlignment(QtCore.Qt.AlignCenter)
         self.filteredImage_label.setObjectName("filteredImage_label")
 
-        self.retranslateUi(filterDialog)
-        self.tabs.setCurrentIndex(3)
-        QtCore.QMetaObject.connectSlotsByName(filterDialog)
+        self.retranslateUi(noiseRemoveDialog)
+        self.tabs.setCurrentIndex(0)
+        QtCore.QMetaObject.connectSlotsByName(noiseRemoveDialog)
 
-    def retranslateUi(self, filterDialog):
+    def retranslateUi(self, noiseRemoveDialog):
         _translate = QtCore.QCoreApplication.translate
-        filterDialog.setWindowTitle(_translate("filterDialog", "Remove Noise"))
-        self.tabs.setWhatsThis(_translate("filterDialog", "<html><head/><body><p>this is tab1</p><p><br/></p></body></html>"))
-        self.tabs.setTabText(self.tabs.indexOf(self.tab), _translate("filterDialog", "Average Filter"))
-        self.tabs.setTabText(self.tabs.indexOf(self.tab_2), _translate("filterDialog", "Median Filter"))
-        self.tabs.setTabText(self.tabs.indexOf(self.tab_3), _translate("filterDialog", "Notch Filter"))
-        self.tabs.setTabText(self.tabs.indexOf(self.tab_5), _translate("filterDialog", "Band Filter"))
-        self.tabs.setTabText(self.tabs.indexOf(self.tab_4), _translate("filterDialog", "Mask Filter"))
+        noiseRemoveDialog.setWindowTitle(_translate("noiseRemoveDialog", "Remove Noise"))
+        self.tabs.setWhatsThis(_translate("noiseRemoveDialog", "<html><head/><body><p>this is tab1</p><p><br/></p></body></html>"))
+        self.tabs.setTabText(self.tabs.indexOf(self.tab), _translate("noiseRemoveDialog", "Average Filter"))
+        self.tabs.setTabText(self.tabs.indexOf(self.tab_2), _translate("noiseRemoveDialog", "Median Filter"))
+        self.tabs.setTabText(self.tabs.indexOf(self.tab_3), _translate("noiseRemoveDialog", "Notch Filter"))
+        self.tabs.setTabText(self.tabs.indexOf(self.tab_5), _translate("noiseRemoveDialog", "Band Filter"))
+        self.tabs.setTabText(self.tabs.indexOf(self.tab_4), _translate("noiseRemoveDialog", "Mask Filter"))

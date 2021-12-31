@@ -49,6 +49,9 @@
       <height>340</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
     </property>
@@ -76,6 +79,9 @@
       <horstretch>5</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
@@ -152,6 +158,9 @@
       <height>340</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
     </property>
@@ -179,6 +188,9 @@
       <horstretch>5</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
@@ -219,7 +231,7 @@
      <string>Redo</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="radioButton_histogram">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -235,7 +247,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="radioButton_fourier">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -299,8 +311,8 @@
   <tabstop>filtering_Button</tabstop>
   <tabstop>addNoise_Button</tabstop>
   <tabstop>removeNoise_Button</tabstop>
-  <tabstop>radioButton</tabstop>
-  <tabstop>radioButton_2</tabstop>
+  <tabstop>radioButton_histogram</tabstop>
+  <tabstop>radioButton_fourier</tabstop>
   <tabstop>undo_Button</tabstop>
   <tabstop>redo_Button</tabstop>
  </tabstops>
