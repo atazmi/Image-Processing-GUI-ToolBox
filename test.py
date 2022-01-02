@@ -8,6 +8,12 @@ from backend.filters import *
 
 img = cv2.imread("Images/building.jpg")
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+cv2.imshow("grey", img_gray)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
 '''
 histr = calculateHistogram(img)
 
@@ -57,21 +63,7 @@ plt.show()
 #
 #
 #
-# img_with_periodic_noise = add_periodic_noise(img_gray)
-# cv2.imshow("img_with_periodic_noise", img_with_periodic_noise)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-#
-# img_fourier_cv = dft_magnitude(shifted_dft(img_gray))
-#
-# img_fourier_np = np.fft.fftshift(np.fft.fft2(img_gray))
-#
-# plt.subplot(121)
-# plt.imshow(img_fourier_cv, cmap='gray')
-# plt.subplot(122)
-# plt.imshow(img_fourier_cv, cmap='gray')
-# plt.show()
-#
+
 # salt_and_pepper_img = add_salt_and_pepper_noise(img, 0.30, 0.8)
 # plt.subplot(1, 3, 1)
 # plt.imshow(salt_and_pepper_img)

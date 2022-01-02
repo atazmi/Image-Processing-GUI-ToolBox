@@ -14,8 +14,12 @@ def shifted_dft(img):
         - shifted_dft: a numpy array containing the transformed image with the same size but with 2 channels
         (real and complex).
     """
-    img_dft = cv.dft(np.float32(img), flags=cv.DFT_COMPLEX_OUTPUT)
+    # img_dft = cv.dft(np.float32(img), flags=cv.DFT_COMPLEX_OUTPUT)
+    # shifted_dft = np.fft.fftshift(img_dft)
+
+    img_dft = np.fft.fft2(img)
     shifted_dft = np.fft.fftshift(img_dft)
+
     return shifted_dft
 
 
@@ -30,7 +34,8 @@ def dft_magnitude(shifted_dft):
     Returns:
         - magnitude_spectrum: a numpy array of shape (H, W) containing intensity values.
     """
-    magnitude_spectrum = 20 * np.log(cv.magnitude(shifted_dft[:, :, 0], shifted_dft[:, :, 1]))
+    # magnitude_spectrum = 20 * np.log(cv.magnitude(shifted_dft[:, :, 0], shifted_dft[:, :, 1]))
+    magnitude_spectrum = 20* np.log(np.abs(shifted_dft))
     return magnitude_spectrum
 
 
@@ -45,6 +50,11 @@ def inverse_shifted_dft(shifted_dft):
     Returns:
         - img: a numpy array of shape (H, W) containing the original image.
     """
+    # img_dft = np.fft.ifftshift(shifted_dft)
+    # img = cv.idft(img_dft, flags=cv.DFT_REAL_OUTPUT)
+
     img_dft = np.fft.ifftshift(shifted_dft)
-    img = cv.idft(img_dft, flags=cv.DFT_REAL_OUTPUT)
+    img = np.fft.ifft2(img_dft)
+    img = np.abs(img)
+
     return img

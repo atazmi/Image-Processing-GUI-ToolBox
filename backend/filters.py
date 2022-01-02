@@ -1,4 +1,7 @@
+import copy
 import cv2
+import numpy as np
+from .fourier import shifted_dft, dft_magnitude, inverse_shifted_dft
 
 
 def gaussianFilter(image, size=5, sigmaX=0, sigmaY=0):
@@ -86,6 +89,7 @@ def notch_filter(image):
         dft_value:  numpy array containing the transformed image with the same size but with 2 channels
             (real and complex).
         offest: int - the number of rows|columns to be zeros before and after DFT of the image.
+
         Outputs:
             dft_value: numpy array containing the transformed image
         """
@@ -167,3 +171,6 @@ def band_filter(image):
     img_back = inverse_shifted_dft(dft_value)
 
     return img_back
+
+
+
