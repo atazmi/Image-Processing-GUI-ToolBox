@@ -109,7 +109,7 @@
       <x>30</x>
       <y>790</y>
       <width>1111</width>
-      <height>25</height>
+      <height>30</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -219,7 +219,7 @@
      <string>Redo</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="histogram_radioButton">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -235,7 +235,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="fourier_radioButton">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -299,8 +299,8 @@
   <tabstop>filtering_Button</tabstop>
   <tabstop>addNoise_Button</tabstop>
   <tabstop>removeNoise_Button</tabstop>
-  <tabstop>radioButton</tabstop>
-  <tabstop>radioButton_2</tabstop>
+  <tabstop>histogram_radioButton</tabstop>
+  <tabstop>fourier_radioButton</tabstop>
   <tabstop>undo_Button</tabstop>
   <tabstop>redo_Button</tabstop>
  </tabstops>
