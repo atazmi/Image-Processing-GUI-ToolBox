@@ -71,7 +71,7 @@ def add_salt_and_pepper_noise(img, noise_intensity=0.50, salt_intensity=0.5):
     salt_sample = np.random.choice(sample, salt_sample_size, replace=False)
     pepper_sample = np.setdiff1d(sample, salt_sample)
 
-    image[coordinates[salt_sample][:, 0], coordinates[salt_sample][:, 1]] = black
-    image[coordinates[pepper_sample][:, 0], coordinates[pepper_sample][:, 1]] = white
+    image[coordinates[salt_sample][:, 0], coordinates[salt_sample][:, 1]] = white
+    image[coordinates[pepper_sample][:, 0], coordinates[pepper_sample][:, 1]] = black
 
     return image

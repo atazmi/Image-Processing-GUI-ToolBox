@@ -107,7 +107,7 @@ def loadImage():
 
 def reset():
     global original_Image, processed_Image
-    original_Image = processed_Image = None
+    processed_Image = original_Image
     update()
 
 

@@ -72,7 +72,7 @@ class Ui_noiseAddDialog(object):
         self.slider3 = QtWidgets.QSlider(self.tab_2)
         self.slider3.setGeometry(QtCore.QRect(120, 40, 31, 221))
         self.slider3.setMinimum(0)
-        self.slider3.setMaximum(1000)
+        self.slider3.setMaximum(100)
         self.slider3.setSingleStep(1)
         self.slider3.setTracking(True)
         self.slider3.setOrientation(QtCore.Qt.Vertical)
