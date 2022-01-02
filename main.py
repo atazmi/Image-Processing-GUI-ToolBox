@@ -48,7 +48,7 @@ def apply_cmap_to_image(img, cmap):
 
 
 def getHistogramImage(img):
-    img_gray = convertToGray(img)
+    img_gray = getGrayImage(img)
     # make a Figure and attach it to a canvas.
     fig = Figure(figsize=(5, 4), dpi=100)
     canvas = FigureCanvasAgg(fig)
@@ -84,7 +84,7 @@ def getPixmap(img=None):
     return image_Pixmap
 
 
-def convertToGray(img):
+def getGrayImage(img):
     if len(img.shape) == 3:
         img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     return img
@@ -134,11 +134,11 @@ def updateHF():
         original_HF_pixmap = getPixmap(getHistogramImage(original_Image))
         processed_HF_pixmap = getPixmap(getHistogramImage(processed_Image))
     else:
-        dftimg = dft_magnitude(shifted_dft(convertToGray(original_Image)))
+        dftimg = dft_magnitude(shifted_dft(getGrayImage(original_Image)))
         dftimg_gray = apply_cmap_to_image(dftimg, cmap='gray')
         original_HF_pixmap = getPixmap(dftimg_gray)
 
-        dftimg = dft_magnitude(shifted_dft(convertToGray(processed_Image)))
+        dftimg = dft_magnitude(shifted_dft(getGrayImage(processed_Image)))
         dftimg_gray = apply_cmap_to_image(dftimg, cmap='gray')
         processed_HF_pixmap = getPixmap(dftimg_gray)
 
@@ -151,7 +151,13 @@ def updateHF():
 
 def equalizeHist():
     global processed_Image
-    processed_Image = equalizeHistogram(convertToGray(processed_Image))
+    processed_Image = equalizeHistogram(getGrayImage(processed_Image))
+    update()
+
+
+def convertToGray():
+    global processed_Image
+    processed_Image = getGrayImage(processed_Image)
     update()
 
 
@@ -212,28 +218,74 @@ def updateNoiseAdd():
     slider1 = activeDialog.ui.slider1.value() / 100.0
     slider2 = activeDialog.ui.slider2.value() / 100.0
 
-    slider3 = activeDialog.ui.slider3.value()
-    slider4 = activeDialog.ui.slider4.value()
+    slider3 = activeDialog.ui.slider3.value() / 100.0
+    slider4 = activeDialog.ui.slider4.value() / 100.0
+
+    slider5 = activeDialog.ui.slider5.value()
+    slider6 = activeDialog.ui.slider6.value()
+    slider7 = activeDialog.ui.slider7.value()
+    slider8 = activeDialog.ui.slider8.value()
+
 
     activeDialog.ui.slider1_counter.setText(str(slider1))
     activeDialog.ui.slider2_counter.setText(str(slider2))
     activeDialog.ui.slider3_counter.setText(str(slider3))
     activeDialog.ui.slider4_counter.setText(str(slider4))
+    activeDialog.ui.slider5_counter.setText(str(slider5))
+    activeDialog.ui.slider6_counter.setText(str(slider6))
+    activeDialog.ui.slider7_counter.setText(str(slider7))
+    activeDialog.ui.slider8_counter.setText(str(slider8))
 
     idx = activeDialog.ui.tabs.currentIndex()
-    if idx == 0:  # Salt and Pepper
+    if idx == 0:  # Salt and Pepper Noise
         underprocessing_Image = add_salt_and_pepper_noise(processed_Image, slider1, slider2)
-    elif idx == 1:  # Gaussian
+    elif idx == 1:  # Gaussian Noise
         underprocessing_Image = gaussianNoise(processed_Image, slider3, slider4)
-    elif idx == 2:  # Periodic
-        pass
+    elif idx == 2:  # Periodic Noise
+        underprocessing_Image = add_periodic_noise(processed_Image, slider5, slider6, slider7, slider8)
+        cv.imwrite('temp.jpg', underprocessing_Image)
+        underprocessing_Image = cv.imread('temp.jpg')
+        os.remove('temp.jpg')
 
     refresh_dialog()
 
 
 def updateNoiseRemove():
     global activeDialog, processed_Image, underprocessing_Image
-    # Code goes here
+
+    slider1 = activeDialog.ui.slider1.value()
+    slider2 = activeDialog.ui.slider2.value()
+
+    slider3 = activeDialog.ui.slider3.value()
+
+    slider4 = activeDialog.ui.slider4.value()
+    slider5 = activeDialog.ui.slider5.value() / 100.0
+    slider6 = activeDialog.ui.slider6.value() / 100.0
+
+    if slider3 & 1 ^ 1:
+        slider3 += 1
+        activeDialog.ui.slider3.setValue(slider3)
+    if slider4 & 1 ^ 1:
+        slider4 += 1
+        activeDialog.ui.slider4.setValue(slider4)
+
+
+    activeDialog.ui.slider1_counter.setText(str(slider1))
+    activeDialog.ui.slider2_counter.setText(str(slider2))
+    activeDialog.ui.slider3_counter.setText(str(slider3))
+    activeDialog.ui.slider4_counter.setText(str(slider4))
+    activeDialog.ui.slider5_counter.setText(str(slider5))
+    activeDialog.ui.slider6_counter.setText(str(slider6))
+
+    idx = activeDialog.ui.tabs.currentIndex()
+    if idx == 0:  # Average Filter
+        if slider1 > 0 and slider2 > 0:
+            underprocessing_Image = averaging_filter(processed_Image, slider1, slider2)
+    elif idx == 1:  # Median Filter
+        underprocessing_Image = median_filter(processed_Image, slider3)
+    elif idx == 2:  # Gaussian Blur
+        underprocessing_Image = gaussianFilter(processed_Image, slider4, slider5, slider6)
+
     refresh_dialog()
 
 
@@ -289,6 +341,7 @@ ui.saveImage_Button.clicked.connect(saveImage)
 ui.histogram_radioButton.clicked.connect(updateHF)
 ui.fourier_radioButton.clicked.connect(updateHF)
 
+ui.cvttograyscale_Button.clicked.connect(convertToGray)
 ui.equalizeHistogram_Button.clicked.connect(equalizeHist)
 ui.filtering_Button.clicked.connect(lambda: show_dialog(0))
 ui.addNoise_Button.clicked.connect(lambda: show_dialog(1))

@@ -19,7 +19,7 @@ def gaussianNoise(image, mean=0, var=0.001):
     return out
 
 
-def add_periodic_noise(image, A=100, u0=90, v0=50):
+def add_periodic_noise(image, A=100, u0=90, v0=50, freq = 100):
     '''
             A: amplitude - int.
             u0: angle 
@@ -27,10 +27,13 @@ def add_periodic_noise(image, A=100, u0=90, v0=50):
 
     '''
     shape = image.shape
-    noise = np.zeros(shape, dtype='float64')
+    noise = np.zeros((shape[0], shape[1]), dtype='float32')
     x, y = np.meshgrid(range(0, shape[1]), range(0, shape[0]))
 
-    noise += A * np.sin(x * u0 + y * v0)
+    noise += A * np.sin((x * u0 + y * v0) / freq)
+
+    if len(image.shape) > 2:
+        noise = noise.reshape(shape[0], shape[1], 1)
 
     return image + noise
 

@@ -51,6 +51,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.gridLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
+        self.cvttograyscale_Button = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.cvttograyscale_Button.setObjectName("cvttograyscale_Button")
+        self.horizontalLayout.addWidget(self.cvttograyscale_Button)
         self.equalizeHistogram_Button = QtWidgets.QPushButton(self.gridLayoutWidget)
         self.equalizeHistogram_Button.setObjectName("equalizeHistogram_Button")
         self.horizontalLayout.addWidget(self.equalizeHistogram_Button)
@@ -131,10 +134,11 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Image Processing Tool Box"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Image Processing Toolbox"))
         self.loadImage_Button.setText(_translate("MainWindow", "Load Image"))
         self.reset_Button.setText(_translate("MainWindow", "Reset"))
         self.saveImage_Button.setText(_translate("MainWindow", "Save Image"))
+        self.cvttograyscale_Button.setText(_translate("MainWindow", "Convert to Grayscale"))
         self.equalizeHistogram_Button.setText(_translate("MainWindow", "Equalize Histogram"))
         self.filtering_Button.setText(_translate("MainWindow", "Filtering..."))
         self.addNoise_Button.setText(_translate("MainWindow", "Add Noise..."))

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Image Processing Tool Box</string>
+   <string>Image Processing Toolbox</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="loadImage_Button">
@@ -113,6 +113,13 @@
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="cvttograyscale_Button">
+       <property name="text">
+        <string>Convert to Grayscale</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QPushButton" name="equalizeHistogram_Button">
        <property name="text">
