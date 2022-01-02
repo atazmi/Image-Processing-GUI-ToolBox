@@ -70,7 +70,7 @@ def _get_dft_indx(dft_magnitude_value):
     return dft_indexs
 
 
-def notch_filter(image):
+def notch_filter(image, offest = 0):
     """
     This function to remove periodic noise by making the dft row and column
      to be zeros
@@ -79,9 +79,7 @@ def notch_filter(image):
     Outputs:
         filtered image: numpy array - an image without periodic noise.
     """
-
-    def _set_dft_to_zero(dft_indx, dft_value, offset=1):
-
+    def _set_dft_to_zero(dft_indx, dft_value, offset = 0):
         """
         This function to make the row and column of dft to be zero
         Args:
@@ -94,15 +92,18 @@ def notch_filter(image):
             dft_value: numpy array containing the transformed image
         """
         dft_indx = list(dft_indx)
+        dft_indx1 = []
         if offset:
+
             for i in range(1, offset + 1):
                 for dft_ind in dft_indx:
-                    dft_indx.append((dft_ind[0] + offset, dft_ind[1]))
-                    dft_indx.append((dft_ind[0] - offset, dft_ind[1]))
+                    dft_indx1.append((dft_ind[0] + i, dft_ind[1]))
+                    dft_indx1.append((dft_ind[0] - i, dft_ind[1]))
 
-                    dft_indx.append((dft_ind[0], dft_ind[1] + offset))
-                    dft_indx.append((dft_ind[0], dft_ind[1] - offset))
+                    dft_indx1.append((dft_ind[0], dft_ind[1] + i))
+                    dft_indx1.append((dft_ind[0], dft_ind[1] - i))
 
+        dft_indx.extend(dft_indx1)
         for dft_ind in dft_indx:
             dft_value[dft_ind[0], :] = 0
             dft_value[:, dft_ind[1]] = 0
@@ -118,7 +119,7 @@ def notch_filter(image):
     dft_indx = _get_dft_indx(dft_magnitude_value)[1:]
 
     # Set the dft to zero
-    filtered_dft = _set_dft_to_zero(dft_indx, dft_value, offset=0)
+    filtered_dft = _set_dft_to_zero(dft_indx, dft_value, offest)
 
     # get the image back
     img_back = inverse_shifted_dft(filtered_dft)
@@ -126,7 +127,7 @@ def notch_filter(image):
     return img_back
 
 
-def band_filter(image):
+def band_filter(image, offset = 3):
     """
     This function to remove periodic noise by drawing a circle passing through
     the DFT of the image and then making this circle equal to zero.
@@ -149,7 +150,7 @@ def band_filter(image):
         blank_image = np.ones(image_shape)
         for point in points[1:]:
             radius = np.linalg.norm(np.array(point) - center)
-            blank_image = cv2.circle(blank_image, (points[0][1], points[0][0]), round(radius), (0, 0, 0), offest)
+            blank_image = cv2.circle(blank_image, (points[0][1], points[0][0]), int(round(radius)), (0, 0, 0), offest)
         return blank_image
 
     # Get the DFT of the image
@@ -162,7 +163,7 @@ def band_filter(image):
     dft_indx = _get_dft_indx(dft_magnitude_value)
 
     # draw the DFT band
-    blank_image_with_band = _draw_band(image.shape, dft_indx, offest=3)
+    blank_image_with_band = _draw_band(image.shape, dft_indx, offset)
 
     # set zeros to the DFT band
     dft_value *= blank_image_with_band

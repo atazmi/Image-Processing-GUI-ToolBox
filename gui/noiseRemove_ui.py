@@ -141,9 +141,51 @@ class Ui_noiseRemoveDialog(object):
         self.tabs.addTab(self.tab_6, "")
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
+        self.label_5 = QtWidgets.QLabel(self.tab_3)
+        self.label_5.setGeometry(QtCore.QRect(210, 280, 81, 21))
+        self.label_5.setTextFormat(QtCore.Qt.AutoText)
+        self.label_5.setObjectName("label_5")
+        self.slider7_counter = QtWidgets.QLabel(self.tab_3)
+        self.slider7_counter.setGeometry(QtCore.QRect(220, 20, 31, 31))
+        self.slider7_counter.setTextFormat(QtCore.Qt.AutoText)
+        self.slider7_counter.setObjectName("slider7_counter")
+        self.slider7 = QtWidgets.QSlider(self.tab_3)
+        self.slider7.setGeometry(QtCore.QRect(210, 50, 31, 221))
+        self.slider7.setMinimum(0)
+        self.slider7.setMaximum(1000)
+        self.slider7.setSingleStep(1)
+        self.slider7.setProperty("value", 0)
+        self.slider7.setTracking(True)
+        self.slider7.setOrientation(QtCore.Qt.Vertical)
+        self.slider7.setObjectName("slider7")
+        self.apply_button_3 = QtWidgets.QPushButton(self.tab_3)
+        self.apply_button_3.setEnabled(True)
+        self.apply_button_3.setGeometry(QtCore.QRect(420, 290, 93, 28))
+        self.apply_button_3.setObjectName("apply_button_3")
         self.tabs.addTab(self.tab_3, "")
         self.tab_5 = QtWidgets.QWidget()
         self.tab_5.setObjectName("tab_5")
+        self.apply_button_4 = QtWidgets.QPushButton(self.tab_5)
+        self.apply_button_4.setEnabled(True)
+        self.apply_button_4.setGeometry(QtCore.QRect(420, 290, 93, 28))
+        self.apply_button_4.setObjectName("apply_button_4")
+        self.slider8_counter = QtWidgets.QLabel(self.tab_5)
+        self.slider8_counter.setGeometry(QtCore.QRect(220, 20, 31, 31))
+        self.slider8_counter.setTextFormat(QtCore.Qt.AutoText)
+        self.slider8_counter.setObjectName("slider8_counter")
+        self.slider8 = QtWidgets.QSlider(self.tab_5)
+        self.slider8.setGeometry(QtCore.QRect(210, 50, 31, 221))
+        self.slider8.setMinimum(0)
+        self.slider8.setMaximum(1000)
+        self.slider8.setSingleStep(1)
+        self.slider8.setProperty("value", 0)
+        self.slider8.setTracking(True)
+        self.slider8.setOrientation(QtCore.Qt.Vertical)
+        self.slider8.setObjectName("slider8")
+        self.label_6 = QtWidgets.QLabel(self.tab_5)
+        self.label_6.setGeometry(QtCore.QRect(210, 280, 81, 21))
+        self.label_6.setTextFormat(QtCore.Qt.AutoText)
+        self.label_6.setObjectName("label_6")
         self.tabs.addTab(self.tab_5, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
@@ -157,7 +199,7 @@ class Ui_noiseRemoveDialog(object):
         self.image_label.setObjectName("image_label")
 
         self.retranslateUi(noiseRemoveDialog)
-        self.tabs.setCurrentIndex(0)
+        self.tabs.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(noiseRemoveDialog)
 
     def retranslateUi(self, noiseRemoveDialog):
@@ -182,15 +224,21 @@ class Ui_noiseRemoveDialog(object):
         self.slider6_counter.setText(_translate("noiseRemoveDialog", "0"))
         self.label_9.setText(_translate("noiseRemoveDialog", "Sigma Y"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_6), _translate("noiseRemoveDialog", "Gaussian Blur"))
+        self.label_5.setText(_translate("noiseRemoveDialog", "Offset"))
+        self.slider7_counter.setText(_translate("noiseRemoveDialog", "0"))
+        self.apply_button_3.setText(_translate("noiseRemoveDialog", "Apply Filter"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_3), _translate("noiseRemoveDialog", "Notch Filter"))
+        self.apply_button_4.setText(_translate("noiseRemoveDialog", "Apply Filter"))
+        self.slider8_counter.setText(_translate("noiseRemoveDialog", "0"))
+        self.label_6.setText(_translate("noiseRemoveDialog", "Offset"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_5), _translate("noiseRemoveDialog", "Band Filter"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_4), _translate("noiseRemoveDialog", "Mask Filter"))
 
     def getComponents(self):
         return [self.tabs,
-                self.slider1, self.slider2, self.slider3, self.slider4, self.slider5, self.slider6,
-                self.slider1_counter, self.slider2_counter, self.slider3_counter, self.slider4_counter, self.slider5_counter, self.slider6_counter,
-                self.apply_button, self.apply_button_1, self.apply_button_2]
+                self.slider1, self.slider2, self.slider3, self.slider4, self.slider5, self.slider6, self.slider7, self.slider8,
+                self.slider1_counter, self.slider2_counter, self.slider3_counter, self.slider4_counter, self.slider5_counter, self.slider6_counter, self.slider7_counter, self.slider8_counter,
+                self.apply_button, self.apply_button_1, self.apply_button_2, self.apply_button_3, self.apply_button_4]
 
 
 if __name__ == "__main__":

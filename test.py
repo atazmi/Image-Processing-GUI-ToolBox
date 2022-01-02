@@ -9,9 +9,9 @@ from backend.filters import *
 img = cv2.imread("Images/building.jpg")
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-cv2.imshow("grey", img_gray)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.imshow("grey", img_gray)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
 
 '''
@@ -49,9 +49,9 @@ cv2.destroyAllWindows()
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
 #
-soble_edge_img = sobel_filter(img, 11, 1, 1)
-plt.imshow(soble_edge_img)
-plt.show()
+# soble_edge_img = sobel_filter(img, 11, 1, 1)
+# plt.imshow(soble_edge_img)
+# plt.show()
 # cv2.imshow("soble_edge_img", soble_edge_img)
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
@@ -72,3 +72,37 @@ plt.show()
 # plt.subplot(1, 3, 3)
 # plt.imshow(averaging_filter(salt_and_pepper_img,  5, 5))
 # plt.show()
+
+
+# plt.imshow(add_periodic_noise(img_gray), cmap = 'gray')
+# plt.show()
+# noisy = notch_filter(add_periodic_noise(img_gray), 0)
+# plt.imshow(noisy, cmap = 'gray')
+# plt.show()
+#
+
+#
+# filtered_image = band_filter(img_with_periodic_noise)
+# cv2.imwrite('image_filtered_with_band_filter.jpg', filtered_image)
+# image_filtered_with_notch = cv2.imread("image_filtered_with_band_filter.jpg")
+# cv2.imshow("image_filtered_with_band_filter", image_filtered_with_notch)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+
+img_with_periodic_noise = add_periodic_noise(img_gray, 200, 50, 70, 80)
+
+plt.imshow(img_with_periodic_noise, cmap = 'gray')
+plt.show()
+# cv2.imshow("img_with_periodic_noise", img_with_periodic_noise)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+
+filtered_image = notch_filter(img_with_periodic_noise, 10)
+plt.imshow(filtered_image, cmap = 'gray')
+plt.show()
+# cv2.imwrite('image_filtered_with_notch.jpg', filtered_image)
+# cv2.imshow("image_filtered_with_notch", image_filtered_with_notch)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()

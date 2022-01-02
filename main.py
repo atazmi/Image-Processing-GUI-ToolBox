@@ -76,6 +76,7 @@ def getPixmap(img=None):
     if len(img.shape) == 3:
         img = QImage(img.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
     else:
+        img = np.uint8(img)
         img = QImage(img.data, width, height, bytesPerLine, QImage.Format_Grayscale8)
 
     image_Pixmap = QPixmap()
@@ -262,6 +263,10 @@ def updateNoiseRemove():
     slider5 = activeDialog.ui.slider5.value() / 100.0
     slider6 = activeDialog.ui.slider6.value() / 100.0
 
+    slider7 = activeDialog.ui.slider7.value()
+
+    slider8 = activeDialog.ui.slider8.value()
+
     if slider3 & 1 ^ 1:
         slider3 += 1
         activeDialog.ui.slider3.setValue(slider3)
@@ -276,6 +281,8 @@ def updateNoiseRemove():
     activeDialog.ui.slider4_counter.setText(str(slider4))
     activeDialog.ui.slider5_counter.setText(str(slider5))
     activeDialog.ui.slider6_counter.setText(str(slider6))
+    activeDialog.ui.slider7_counter.setText(str(slider7))
+    activeDialog.ui.slider8_counter.setText(str(slider8))
 
     idx = activeDialog.ui.tabs.currentIndex()
     if idx == 0:  # Average Filter
@@ -285,8 +292,23 @@ def updateNoiseRemove():
         underprocessing_Image = median_filter(processed_Image, slider3)
     elif idx == 2:  # Gaussian Blur
         underprocessing_Image = gaussianFilter(processed_Image, slider4, slider5, slider6)
+    elif idx == 3: # Notch Filter
+        # cv.imwrite('temp1.jpg', notch_filter(add_periodic_noise(getGrayImage(original_Image), 200, 50, 70, 80))) # Testing
+        underprocessing_Image = notch_filter(getGrayImage(processed_Image), slider7)
+        cv.imwrite('temp.jpg', underprocessing_Image)
+        underprocessing_Image = cv.imread('temp.jpg')
+        # os.remove('temp.jpg')
+    elif idx == 4: # Band Filter
+        underprocessing_Image = band_filter(getGrayImage(processed_Image), slider8)
+        cv.imwrite('temp.jpg', underprocessing_Image)
+        underprocessing_Image = cv.imread('temp.jpg')
+        os.remove('temp.jpg')
+    elif idx == 5: # Mask Filter
+        # activeDialog.ui.image_label.mousePressEvent = lambda: print('Clicked')
+        pass
 
     refresh_dialog()
+
 
 
 dialogs = [Ui_filterDialog, Ui_noiseAddDialog, Ui_noiseRemoveDialog]
@@ -326,6 +348,8 @@ def show_dialog(idx):
         if type(c) is QtWidgets.QCheckBox:
             c.clicked.connect(updateFunctions[idx])
 
+    # activeDialog.ui.tabs.mousePressEvent = ay()
+
     activeDialog.exec_()
 
 
@@ -352,7 +376,6 @@ ui.removeNoise_Button.clicked.connect(lambda: show_dialog(2))
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
-
 
 sys.excepthook = except_hook
 
