@@ -172,6 +172,98 @@ def saveImage():
     else:
         plt.imsave(filename[0], img, cmap='gray')
 
+####################################################################################
+"""
+    Mask Filter Functions
+"""
+number_of_points=0
+point1 = point2 = []
+factor_h = factor_w = 0
+mf_fourierImage=None
+
+def mf_reset_points():
+    global activeDialog, processed_Image, underprocessing_Image
+    global number_of_points, point1, point2
+    number_of_points=0
+    activeDialog.ui.label_point1MaskFilter.setText( "point_1: ?")
+    activeDialog.ui.label_point2MaskFilter.setText( "point_2: ?")
+    activeDialog.ui.apply_button_5.setEnabled(False)
+    activeDialog.ui.pushButton_preview.setEnabled(False)
+    underprocessing_Image = processed_Image
+    mf_set_Fourier_Image(underprocessing_Image)
+    
+
+def mf_tabsChange():
+    global activeDialog, processed_Image, underprocessing_Image, number_of_points
+    if activeDialog.ui.tabs.currentIndex() == 5: # mask filter
+        # print("hello from mf_setup()")
+        number_of_points=0
+        mf_set_Fourier_Image(processed_Image)
+        activeDialog.ui.image_label.mousePressEvent = lambda e: mf_mousePressed(e)
+        # activeDialog.ui.image_label.leaveEvent = lambda e: mf_processImage()
+        activeDialog.ui.pushButton_reset.clicked.connect(mf_reset_points)
+        activeDialog.ui.pushButton_preview.clicked.connect(mf_preview_result)
+    else:
+        refresh_dialog()
+
+def mf_mousePressed(event):
+    global number_of_points, point1, point2, factor_h, factor_w
+    global original_Image
+    
+    hi, wi = original_Image.shape[:2]
+    hl, wl = 340, 550
+    factor_w = wi/wl
+    factor_h = hi/hl
+
+    print(event.pos())
+    y, x = (int(factor_w * event.pos().x()), int(factor_h * event.pos().y()))
+
+    if number_of_points == 0:
+        point1 = x, y
+        text = "point_1: " + str(point1)
+        activeDialog.ui.label_point1MaskFilter.setText(text)
+        number_of_points += 1
+    elif number_of_points == 1:
+        point2 = (x, y)
+        text = "point_2: " + str(point2)
+        activeDialog.ui.label_point2MaskFilter.setText(text)
+        activeDialog.ui.apply_button_5.setEnabled(True)
+        activeDialog.ui.pushButton_preview.setEnabled(True)
+        number_of_points += 1
+    
+
+def mf_set_Fourier_Image(image):
+    global activeDialog, processed_Image, underprocessing_Image, mf_fourierImage
+    # mf_fourierImage= np.fft.fftshift(np.fft.fft2(image))
+    dftimg = shifted_dft(getGrayImage(image))
+    mf_fourierImage = dftimg
+    dftimg_gray = apply_cmap_to_image(dft_magnitude(dftimg), cmap='gray')
+    processed_HF_pixmap = getPixmap(dftimg_gray)
+    activeDialog.ui.image_label.setPixmap(processed_HF_pixmap)
+
+def mf_processImage():
+    global factor_h, factor_w
+    global activeDialog, processed_Image, underprocessing_Image, mf_fourierImage
+    if number_of_points == 2:
+        print("processing...")
+        underprocessing_Image = maskFilter(mf_fourierImage, point1, point2, filter_size=10)
+        # apply inverse Fourier Transform to get normal Image
+        # underprocessing_Image = np.fft.ifft2(underprocessing_Image)
+        underprocessing_Image = inverse_shifted_dft(underprocessing_Image)
+def mf_preview_result():
+    global number_of_points
+    global activeDialog, processed_Image, underprocessing_Image, mf_fourierImage
+    mf_processImage()
+
+    
+    cv.imwrite("maskFiltered.jpg", underprocessing_Image)
+    underprocessing_Image = cv.imread('maskFiltered.jpg')
+    os.remove('maskFiltered.jpg')
+
+    cv.imshow("After Mask Filter", underprocessing_Image)
+    mf_set_Fourier_Image(underprocessing_Image)
+    number_of_points = 0
+    
 
 ####################################################################################
 """
@@ -305,6 +397,7 @@ def updateNoiseRemove():
         os.remove('temp.jpg')
     elif idx == 5: # Mask Filter
         # activeDialog.ui.image_label.mousePressEvent = lambda: print('Clicked')
+        mf_reset_points()
         pass
 
     refresh_dialog()
@@ -340,6 +433,8 @@ def show_dialog(idx):
     for c in components:
         if type(c) is QtWidgets.QTabWidget:
             # TODO: Reset image at tabs navigation
+            # print('tabs')
+            # activeDialog.ui.tabs.currentChanged.connect(lambda e: print("changed tab")) #changed!
             pass
         if type(c) is QtWidgets.QPushButton:
             c.clicked.connect(applyChanges)
@@ -347,8 +442,9 @@ def show_dialog(idx):
             c.valueChanged['int'].connect(updateFunctions[idx])
         if type(c) is QtWidgets.QCheckBox:
             c.clicked.connect(updateFunctions[idx])
-
-    # activeDialog.ui.tabs.mousePressEvent = ay()
+    if(type(activeDialog.ui) == Ui_noiseRemoveDialog):
+        activeDialog.ui.tabs.currentChanged.connect(mf_tabsChange)
+    # activeDialog.ui.tabs.mousePressEvent = maskFilter()
 
     activeDialog.exec_()
 

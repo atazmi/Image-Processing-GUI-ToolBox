@@ -173,5 +173,29 @@ def band_filter(image, offset = 3):
 
     return img_back
 
+def maskFilter(image_fourier, point_1, point_2, filter_size = 50):
+    """
+    Takes an image and two points in the image to suppress as a maskFilter.
 
-
+    Inputs:
+        - image: A numpy array of shape (H, W) containing the image.
+        - point_1: array of two values for the first point (x,y) to be supressed.
+        - point_2: array of two values for the first point (x,y) to be supressed.
+    Returns:
+        - mask: a numpy array of shape (H, W) containing the mask after supressing the
+                the two points.
+    """
+    filter_size = int(filter_size)
+    mask = np.ones_like(image_fourier, dtype=np.uint8)
+    if(len(image_fourier.shape)==2):
+        mask[point_1[0]-filter_size:point_1[0]+filter_size, point_1[1]-filter_size:point_1[1]+filter_size] = 0
+        mask[point_2[0]-filter_size:point_2[0]+filter_size, point_2[1]-filter_size:point_2[1]+filter_size] = 0
+    else:
+        mask[point_1[0]-filter_size:point_1[0]+filter_size, point_1[1]-filter_size:point_1[1]+filter_size, :] = 0
+        mask[point_2[0]-filter_size:point_2[0]+filter_size, point_2[1]-filter_size:point_2[1]+filter_size, :] = 0
+    # cv2.imshow("Mask", 255*mask)
+    # cv2.waitKey(0)
+    ouput_image = mask * image_fourier
+    # cv2.imshow("after filter", np.array(ouput_image, dtype=np.uint8))
+    # cv2.waitKey(0)
+    return ouput_image
