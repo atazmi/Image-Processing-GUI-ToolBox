@@ -14,9 +14,77 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_noiseAddDialog(object):
     def setupUi(self, noiseAddDialog):
         noiseAddDialog.setObjectName("noiseAddDialog")
-        noiseAddDialog.resize(1129, 397)
-        self.tabs = QtWidgets.QTabWidget(noiseAddDialog)
+        noiseAddDialog.resize(1141, 461)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(noiseAddDialog.sizePolicy().hasHeightForWidth())
+        noiseAddDialog.setSizePolicy(sizePolicy)
+        noiseAddDialog.setMinimumSize(QtCore.QSize(1141, 461))
+        noiseAddDialog.setMaximumSize(QtCore.QSize(1141, 461))
+        self.frame = QtWidgets.QFrame(noiseAddDialog)
+        self.frame.setGeometry(QtCore.QRect(10, 10, 1121, 51))
+        self.frame.setStyleSheet("QFrame#frame{\n"
+"border-radius: 4px;\n"
+"border: 2px solid rgb(229, 229, 229);\n"
+"}")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.label_15 = QtWidgets.QLabel(self.frame)
+        self.label_15.setGeometry(QtCore.QRect(10, 0, 401, 41))
+        self.label_15.setStyleSheet("color: #FFF;\n"
+"font: 75 20pt \"Berlin Sans FB Demi\";")
+        self.label_15.setTextFormat(QtCore.Qt.PlainText)
+        self.label_15.setObjectName("label_15")
+        self.close_button = QtWidgets.QPushButton(self.frame)
+        self.close_button.setGeometry(QtCore.QRect(1090, 20, 17, 17))
+        self.close_button.setMinimumSize(QtCore.QSize(16, 16))
+        self.close_button.setMaximumSize(QtCore.QSize(17, 17))
+        self.close_button.setStyleSheet("QPushButton {\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"    background-color: rgb(255, 0, 0);\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgba(255, 0, 0, 150);\n"
+"}")
+        self.close_button.setText("")
+        self.close_button.setObjectName("close_button")
+        self.minimize_button = QtWidgets.QPushButton(self.frame)
+        self.minimize_button.setGeometry(QtCore.QRect(1060, 20, 17, 17))
+        self.minimize_button.setMinimumSize(QtCore.QSize(16, 16))
+        self.minimize_button.setMaximumSize(QtCore.QSize(17, 17))
+        self.minimize_button.setStyleSheet("QPushButton {\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"    background-color: rgb(255, 170, 0);\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: rgba(255, 170, 0, 150);\n"
+"}")
+        self.minimize_button.setText("")
+        self.minimize_button.setObjectName("minimize_button")
+        self.frame_2 = QtWidgets.QFrame(noiseAddDialog)
+        self.frame_2.setGeometry(QtCore.QRect(10, 70, 1121, 381))
+        self.frame_2.setStyleSheet("QFrame#frame_2{\n"
+"border-radius: 4px;\n"
+"border: 2px solid rgb(229, 229, 229);\n"
+"}")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.image_label = QtWidgets.QLabel(self.frame_2)
+        self.image_label.setGeometry(QtCore.QRect(560, 30, 550, 340))
+        self.image_label.setFrameShape(QtWidgets.QFrame.Box)
+        self.image_label.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.image_label.setText("")
+        self.image_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.image_label.setObjectName("image_label")
+        self.tabs = QtWidgets.QTabWidget(self.frame_2)
         self.tabs.setGeometry(QtCore.QRect(10, 10, 541, 361))
+        self.tabs.setWhatsThis("")
         self.tabs.setObjectName("tabs")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
@@ -105,7 +173,7 @@ class Ui_noiseAddDialog(object):
         self.slider5_counter.setTextFormat(QtCore.Qt.AutoText)
         self.slider5_counter.setObjectName("slider5_counter")
         self.label_11 = QtWidgets.QLabel(self.tab_3)
-        self.label_11.setGeometry(QtCore.QRect(70, 290, 71, 21))
+        self.label_11.setGeometry(QtCore.QRect(90, 290, 21, 21))
         self.label_11.setTextFormat(QtCore.Qt.AutoText)
         self.label_11.setObjectName("label_11")
         self.apply_button_2 = QtWidgets.QPushButton(self.tab_3)
@@ -115,7 +183,7 @@ class Ui_noiseAddDialog(object):
         self.slider5 = QtWidgets.QSlider(self.tab_3)
         self.slider5.setGeometry(QtCore.QRect(80, 60, 31, 221))
         self.slider5.setMinimum(0)
-        self.slider5.setMaximum(1000)
+        self.slider5.setMaximum(300)
         self.slider5.setSingleStep(1)
         self.slider5.setTracking(True)
         self.slider5.setOrientation(QtCore.Qt.Vertical)
@@ -125,25 +193,25 @@ class Ui_noiseAddDialog(object):
         self.slider6_counter.setTextFormat(QtCore.Qt.AutoText)
         self.slider6_counter.setObjectName("slider6_counter")
         self.label_12 = QtWidgets.QLabel(self.tab_3)
-        self.label_12.setGeometry(QtCore.QRect(140, 290, 71, 21))
+        self.label_12.setGeometry(QtCore.QRect(150, 290, 21, 21))
         self.label_12.setTextFormat(QtCore.Qt.AutoText)
         self.label_12.setObjectName("label_12")
         self.slider6 = QtWidgets.QSlider(self.tab_3)
         self.slider6.setGeometry(QtCore.QRect(140, 60, 31, 221))
         self.slider6.setMinimum(0)
-        self.slider6.setMaximum(1000)
+        self.slider6.setMaximum(100)
         self.slider6.setSingleStep(1)
         self.slider6.setTracking(True)
         self.slider6.setOrientation(QtCore.Qt.Vertical)
         self.slider6.setObjectName("slider6")
         self.label_13 = QtWidgets.QLabel(self.tab_3)
-        self.label_13.setGeometry(QtCore.QRect(200, 290, 71, 21))
+        self.label_13.setGeometry(QtCore.QRect(210, 290, 16, 21))
         self.label_13.setTextFormat(QtCore.Qt.AutoText)
         self.label_13.setObjectName("label_13")
         self.slider7 = QtWidgets.QSlider(self.tab_3)
         self.slider7.setGeometry(QtCore.QRect(200, 60, 31, 221))
         self.slider7.setMinimum(0)
-        self.slider7.setMaximum(1000)
+        self.slider7.setMaximum(100)
         self.slider7.setSingleStep(1)
         self.slider7.setTracking(True)
         self.slider7.setOrientation(QtCore.Qt.Vertical)
@@ -153,7 +221,7 @@ class Ui_noiseAddDialog(object):
         self.slider7_counter.setTextFormat(QtCore.Qt.AutoText)
         self.slider7_counter.setObjectName("slider7_counter")
         self.label_14 = QtWidgets.QLabel(self.tab_3)
-        self.label_14.setGeometry(QtCore.QRect(260, 290, 51, 21))
+        self.label_14.setGeometry(QtCore.QRect(270, 290, 16, 21))
         self.label_14.setTextFormat(QtCore.Qt.AutoText)
         self.label_14.setObjectName("label_14")
         self.slider8_counter = QtWidgets.QLabel(self.tab_3)
@@ -163,19 +231,16 @@ class Ui_noiseAddDialog(object):
         self.slider8 = QtWidgets.QSlider(self.tab_3)
         self.slider8.setGeometry(QtCore.QRect(260, 60, 31, 221))
         self.slider8.setMinimum(1)
-        self.slider8.setMaximum(1000)
+        self.slider8.setMaximum(200)
         self.slider8.setSingleStep(1)
         self.slider8.setTracking(True)
         self.slider8.setOrientation(QtCore.Qt.Vertical)
         self.slider8.setObjectName("slider8")
+        self.label = QtWidgets.QLabel(self.tab_3)
+        self.label.setGeometry(QtCore.QRect(60, 0, 251, 31))
+        self.label.setStyleSheet("font-size: 20px;")
+        self.label.setObjectName("label")
         self.tabs.addTab(self.tab_3, "")
-        self.image_label = QtWidgets.QLabel(noiseAddDialog)
-        self.image_label.setGeometry(QtCore.QRect(560, 30, 550, 340))
-        self.image_label.setFrameShape(QtWidgets.QFrame.Box)
-        self.image_label.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.image_label.setText("")
-        self.image_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.image_label.setObjectName("image_label")
 
         self.retranslateUi(noiseAddDialog)
         self.tabs.setCurrentIndex(0)
@@ -184,28 +249,29 @@ class Ui_noiseAddDialog(object):
     def retranslateUi(self, noiseAddDialog):
         _translate = QtCore.QCoreApplication.translate
         noiseAddDialog.setWindowTitle(_translate("noiseAddDialog", "Add Noise"))
-        self.tabs.setWhatsThis(_translate("noiseAddDialog", "<html><head/><body><p>this is tab1</p><p><br/></p></body></html>"))
+        self.label_15.setText(_translate("noiseAddDialog", "Add Noise"))
         self.slider2_counter.setText(_translate("noiseAddDialog", "0"))
-        self.apply_button.setText(_translate("noiseAddDialog", "Apply Filter"))
+        self.apply_button.setText(_translate("noiseAddDialog", "Apply Noise"))
         self.label_3.setText(_translate("noiseAddDialog", "Salt Ratio"))
         self.slider1_counter.setText(_translate("noiseAddDialog", "0"))
         self.label_4.setText(_translate("noiseAddDialog", "Noise Ratio"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab), _translate("noiseAddDialog", "Salt and Pepper"))
         self.slider3_counter.setText(_translate("noiseAddDialog", "0"))
-        self.apply_button_1.setText(_translate("noiseAddDialog", "Apply Filter"))
+        self.apply_button_1.setText(_translate("noiseAddDialog", "Apply Noise"))
         self.label_9.setText(_translate("noiseAddDialog", "Mean"))
         self.label_10.setText(_translate("noiseAddDialog", "Variance"))
         self.slider4_counter.setText(_translate("noiseAddDialog", "0"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_2), _translate("noiseAddDialog", "Gaussian"))
         self.slider5_counter.setText(_translate("noiseAddDialog", "0"))
-        self.label_11.setText(_translate("noiseAddDialog", "Amplitude"))
-        self.apply_button_2.setText(_translate("noiseAddDialog", "Apply Filter"))
+        self.label_11.setText(_translate("noiseAddDialog", "A"))
+        self.apply_button_2.setText(_translate("noiseAddDialog", "Apply Noise"))
         self.slider6_counter.setText(_translate("noiseAddDialog", "0"))
-        self.label_12.setText(_translate("noiseAddDialog", "Theta 1"))
-        self.label_13.setText(_translate("noiseAddDialog", "Theta 2"))
+        self.label_12.setText(_translate("noiseAddDialog", "U"))
+        self.label_13.setText(_translate("noiseAddDialog", "V"))
         self.slider7_counter.setText(_translate("noiseAddDialog", "0"))
-        self.label_14.setText(_translate("noiseAddDialog", "Period"))
+        self.label_14.setText(_translate("noiseAddDialog", "T"))
         self.slider8_counter.setText(_translate("noiseAddDialog", "1"))
+        self.label.setText(_translate("noiseAddDialog", "Noise = A*Sin((ux + vy)/t)"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_3), _translate("noiseAddDialog", "Periodic"))
 
     def getComponents(self):
@@ -213,12 +279,3 @@ class Ui_noiseAddDialog(object):
                 self.slider1, self.slider2, self.slider3, self.slider4, self.slider5, self.slider6, self.slider7, self.slider8,
                 self.slider1_counter, self.slider2_counter, self.slider3_counter, self.slider4_counter, self.slider5_counter, self.slider6_counter, self.slider7_counter, self.slider8_counter,
                 self.apply_button, self.apply_button_1, self.apply_button_2]
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    noiseAddDialog = QtWidgets.QDialog()
-    ui = Ui_noiseAddDialog()
-    ui.setupUi(noiseAddDialog)
-    noiseAddDialog.show()
-    sys.exit(app.exec_())

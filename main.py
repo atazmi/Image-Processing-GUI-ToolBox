@@ -1,7 +1,7 @@
 import os
 import sys
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
@@ -20,10 +20,36 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import numpy as np
 
+#######################################################################
+
+offset = 0
+def mousePressEvent(event):
+    global offset
+    offset = event.pos()
+def mouseMoveEvent(event):
+    global offset
+    try:
+        x = event.globalX()
+        y = event.globalY()
+        x_w = offset.x()
+        y_w = offset.y()
+        if activeDialog is None:
+            MainWindow.move(x - x_w, y - y_w)
+        else:
+            activeDialog.move(x - x_w, y - y_w)
+    except:
+        pass
+#######################################################################
+
 app = QApplication(sys.argv)
+style = open('gui\Eclippy.qss').read()
+app.setStyleSheet(style)
 MainWindow = QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
+MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+MainWindow.mousePressEvent = mousePressEvent
+MainWindow.mouseMoveEvent = mouseMoveEvent
 MainWindow.show()
 
 #######################################################################
@@ -33,6 +59,7 @@ MainWindow.show()
 
 original_Image = processed_Image = None
 underprocessing_Image = None
+undo, redo = [], []
 
 #######################################################################
 """
@@ -70,17 +97,9 @@ def getPixmap(img=None):
     if img is None:
         return QPixmap()
 
-    height, width = img.shape[0:2]
-    bytesPerLine = img.strides[0]
-
-    if len(img.shape) == 3:
-        img = QImage(img.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
-    else:
-        img = np.uint8(img)
-        img = QImage(img.data, width, height, bytesPerLine, QImage.Format_Grayscale8)
-
-    image_Pixmap = QPixmap()
-    image_Pixmap.convertFromImage(img)
+    cv.imwrite('tempo.jpg', img)
+    image_Pixmap = QPixmap('tempo.jpg')
+    os.remove('tempo.jpg')
 
     return image_Pixmap
 
@@ -97,14 +116,16 @@ def getGrayImage(img):
 """
 
 
-def loadImage():
+def loadImage(init = False):
     global original_Image, processed_Image
-    # TODO: Specify allowed image extensions
-    img_path = QFileDialog.getOpenFileName(filter="Image (*.*)")[0]
-    if img_path != '':
-        original_Image = processed_Image = cv.imread(img_path)
-        update()
 
+    if init is False:
+        img_path = QFileDialog.getOpenFileName(filter="Image (*.jpg *.png *.jpeg *.tif *.jfif)")[0]
+        if img_path != '':
+            original_Image = processed_Image = cv.imread(img_path)
+    else:
+        original_Image = processed_Image = cv.imread('images\placeholder.jpg')
+    update()
 
 def reset():
     global original_Image, processed_Image
@@ -120,9 +141,6 @@ def update():
 def updateImages():
     ui.originalImage_label.setPixmap(getPixmap(original_Image))
     ui.processedImage_label.setPixmap(getPixmap(processed_Image))
-    # TODO: Fix Scaling Problem
-    ui.originalImage_label.setScaledContents(True)
-    ui.processedImage_label.setScaledContents(True)
 
 
 def updateHF():
@@ -145,9 +163,6 @@ def updateHF():
 
     ui.original_HF_label.setPixmap(original_HF_pixmap)
     ui.processed_HF_label.setPixmap(processed_HF_pixmap)
-    # TODO: Fix Scaling Problem
-    ui.original_HF_label.setScaledContents(True)
-    ui.processed_HF_label.setScaledContents(True)
 
 
 def equalizeHist():
@@ -164,6 +179,9 @@ def convertToGray():
 
 def saveImage():
     filename = QFileDialog.getSaveFileName(caption="Save Processed Image", filter='JPEG (*.jpg)')
+
+    if filename == ('', ''):
+        return
 
     img = processed_Image.copy()
     if len(img.shape) == 3:
@@ -195,15 +213,15 @@ def mf_reset_points():
 
 def mf_tabsChange():
     global activeDialog, processed_Image, underprocessing_Image, number_of_points
+
     if activeDialog.ui.tabs.currentIndex() == 5: # mask filter
-        # print("hello from mf_setup()")
         number_of_points=0
         mf_set_Fourier_Image(processed_Image)
         activeDialog.ui.image_label.mousePressEvent = lambda e: mf_mousePressed(e)
-        # activeDialog.ui.image_label.leaveEvent = lambda e: mf_processImage()
         activeDialog.ui.pushButton_reset.clicked.connect(mf_reset_points)
         activeDialog.ui.pushButton_preview.clicked.connect(mf_preview_result)
     else:
+        underprocessing_Image = processed_Image
         refresh_dialog()
 
 def mf_mousePressed(event):
@@ -215,7 +233,6 @@ def mf_mousePressed(event):
     factor_w = wi/wl
     factor_h = hi/hl
 
-    print(event.pos())
     y, x = (int(factor_w * event.pos().x()), int(factor_h * event.pos().y()))
 
     if number_of_points == 0:
@@ -230,11 +247,11 @@ def mf_mousePressed(event):
         activeDialog.ui.apply_button_5.setEnabled(True)
         activeDialog.ui.pushButton_preview.setEnabled(True)
         number_of_points += 1
-    
+        mf_processImage()
+        mf_set_Fourier_Image(underprocessing_Image)
 
 def mf_set_Fourier_Image(image):
     global activeDialog, processed_Image, underprocessing_Image, mf_fourierImage
-    # mf_fourierImage= np.fft.fftshift(np.fft.fft2(image))
     dftimg = shifted_dft(getGrayImage(image))
     mf_fourierImage = dftimg
     dftimg_gray = apply_cmap_to_image(dft_magnitude(dftimg), cmap='gray')
@@ -245,22 +262,14 @@ def mf_processImage():
     global factor_h, factor_w
     global activeDialog, processed_Image, underprocessing_Image, mf_fourierImage
     if number_of_points == 2:
-        print("processing...")
         underprocessing_Image = maskFilter(mf_fourierImage, point1, point2, filter_size=10)
-        # apply inverse Fourier Transform to get normal Image
-        # underprocessing_Image = np.fft.ifft2(underprocessing_Image)
         underprocessing_Image = inverse_shifted_dft(underprocessing_Image)
 def mf_preview_result():
     global number_of_points
     global activeDialog, processed_Image, underprocessing_Image, mf_fourierImage
     mf_processImage()
 
-    
-    cv.imwrite("maskFiltered.jpg", underprocessing_Image)
-    underprocessing_Image = cv.imread('maskFiltered.jpg')
-    os.remove('maskFiltered.jpg')
-
-    cv.imshow("After Mask Filter", underprocessing_Image)
+    cv.imshow("After Mask Filter", np.uint8(underprocessing_Image))
     mf_set_Fourier_Image(underprocessing_Image)
     number_of_points = 0
     
@@ -273,9 +282,29 @@ def mf_preview_result():
 
 def applyChanges():
     global activeDialog, processed_Image, underprocessing_Image
+    undo.append(processed_Image.copy())
+    ui.undo_Button.setEnabled(True)
     processed_Image = underprocessing_Image.copy()
     update()
     activeDialog.close()
+
+def undoChanges():
+    global processed_Image, underprocessing_Image
+    redo.append(processed_Image.copy())
+    ui.redo_Button.setEnabled(True)
+    processed_Image = undo.pop()
+    if len(undo) == 0:
+        ui.undo_Button.setEnabled(False)
+    update()
+
+def redoChanges():
+    global processed_Image, underprocessing_Image
+    undo.append(processed_Image.copy())
+    ui.undo_Button.setEnabled(True)
+    processed_Image = redo.pop()
+    if len(redo) == 0:
+        ui.redo_Button.setEnabled(False)
+    update()
 
 
 def updateFilter():
@@ -336,9 +365,6 @@ def updateNoiseAdd():
         underprocessing_Image = gaussianNoise(processed_Image, slider3, slider4)
     elif idx == 2:  # Periodic Noise
         underprocessing_Image = add_periodic_noise(processed_Image, slider5, slider6, slider7, slider8)
-        cv.imwrite('temp.jpg', underprocessing_Image)
-        underprocessing_Image = cv.imread('temp.jpg')
-        os.remove('temp.jpg')
 
     refresh_dialog()
 
@@ -385,18 +411,10 @@ def updateNoiseRemove():
     elif idx == 2:  # Gaussian Blur
         underprocessing_Image = gaussianFilter(processed_Image, slider4, slider5, slider6)
     elif idx == 3: # Notch Filter
-        # cv.imwrite('temp1.jpg', notch_filter(add_periodic_noise(getGrayImage(original_Image), 200, 50, 70, 80))) # Testing
         underprocessing_Image = notch_filter(getGrayImage(processed_Image), slider7)
-        cv.imwrite('temp.jpg', underprocessing_Image)
-        underprocessing_Image = cv.imread('temp.jpg')
-        # os.remove('temp.jpg')
     elif idx == 4: # Band Filter
         underprocessing_Image = band_filter(getGrayImage(processed_Image), slider8)
-        cv.imwrite('temp.jpg', underprocessing_Image)
-        underprocessing_Image = cv.imread('temp.jpg')
-        os.remove('temp.jpg')
     elif idx == 5: # Mask Filter
-        # activeDialog.ui.image_label.mousePressEvent = lambda: print('Clicked')
         mf_reset_points()
         pass
 
@@ -412,7 +430,10 @@ activeDialog = None
 
 def setup_dialog(dialogUI):
     global activeDialog
-    activeDialog = QtWidgets.QDialog()
+    activeDialog = QtWidgets.QDialog(None, QtCore.Qt.WindowCloseButtonHint)
+    activeDialog.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+    activeDialog.mousePressEvent = mousePressEvent
+    activeDialog.mouseMoveEvent = mouseMoveEvent
     activeDialog.ui = dialogUI()
     activeDialog.ui.setupUi(activeDialog)
 
@@ -432,30 +453,35 @@ def show_dialog(idx):
     components = activeDialog.ui.getComponents()
     for c in components:
         if type(c) is QtWidgets.QTabWidget:
-            # TODO: Reset image at tabs navigation
-            # print('tabs')
-            # activeDialog.ui.tabs.currentChanged.connect(lambda e: print("changed tab")) #changed!
-            pass
+            activeDialog.ui.tabs.currentChanged.connect(mf_tabsChange)
         if type(c) is QtWidgets.QPushButton:
             c.clicked.connect(applyChanges)
         if type(c) is QtWidgets.QSlider:
             c.valueChanged['int'].connect(updateFunctions[idx])
         if type(c) is QtWidgets.QCheckBox:
             c.clicked.connect(updateFunctions[idx])
-    if(type(activeDialog.ui) == Ui_noiseRemoveDialog):
-        activeDialog.ui.tabs.currentChanged.connect(mf_tabsChange)
-    # activeDialog.ui.tabs.mousePressEvent = maskFilter()
 
+    activeDialog.ui.close_button.clicked.connect(close_dialog)
+    activeDialog.ui.minimize_button.clicked.connect(activeDialog.showMinimized)
     activeDialog.exec_()
+
+def close_dialog():
+    global activeDialog
+    activeDialog.close()
+    activeDialog = None
 
 
 #######################################################################
 
-# TODO: Disable all buttons when images are None or place a default image with program logo
+loadImage(True)
 
+ui.close_button.clicked.connect(app.exit)
+ui.minimize_button.clicked.connect(MainWindow.showMinimized)
 
 ui.loadImage_Button.clicked.connect(loadImage)
 ui.reset_Button.clicked.connect(reset)
+ui.undo_Button.clicked.connect(undoChanges)
+ui.redo_Button.clicked.connect(redoChanges)
 ui.saveImage_Button.clicked.connect(saveImage)
 
 ui.histogram_radioButton.clicked.connect(updateHF)
@@ -466,7 +492,6 @@ ui.equalizeHistogram_Button.clicked.connect(equalizeHist)
 ui.filtering_Button.clicked.connect(lambda: show_dialog(0))
 ui.addNoise_Button.clicked.connect(lambda: show_dialog(1))
 ui.removeNoise_Button.clicked.connect(lambda: show_dialog(2))
-
 
 #######################################################################
 

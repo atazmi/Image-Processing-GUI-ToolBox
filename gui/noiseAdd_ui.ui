@@ -6,575 +6,744 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1129</width>
-    <height>397</height>
+    <width>1141</width>
+    <height>461</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1141</width>
+    <height>461</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1141</width>
+    <height>461</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Add Noise</string>
   </property>
-  <widget class="QTabWidget" name="tabs">
+  <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>541</width>
-     <height>361</height>
+     <width>1121</width>
+     <height>51</height>
     </rect>
    </property>
-   <property name="whatsThis">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;this is tab1&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
-   </property>
-   <widget class="QWidget" name="tab">
-    <attribute name="title">
-     <string>Salt and Pepper</string>
-    </attribute>
-    <widget class="QSlider" name="slider2">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>40</y>
-       <width>31</width>
-       <height>221</height>
-      </rect>
-     </property>
-     <property name="minimum">
-      <number>0</number>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="value">
-      <number>0</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="slider2_counter">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>10</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="apply_button">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>290</y>
-       <width>93</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Apply Filter</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>270</y>
-       <width>71</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Salt Ratio</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="slider1_counter">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>10</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QSlider" name="slider1">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>40</y>
-       <width>31</width>
-       <height>221</height>
-      </rect>
-     </property>
-     <property name="minimum">
-      <number>0</number>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="value">
-      <number>0</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>270</y>
-       <width>71</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Noise Ratio</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tab_2">
-    <attribute name="title">
-     <string>Gaussian</string>
-    </attribute>
-    <widget class="QLabel" name="slider3_counter">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>10</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="apply_button_1">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>290</y>
-       <width>93</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Apply Filter</string>
-     </property>
-    </widget>
-    <widget class="QSlider" name="slider3">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>40</y>
-       <width>31</width>
-       <height>221</height>
-      </rect>
-     </property>
-     <property name="minimum">
-      <number>0</number>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_9">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>270</y>
-       <width>71</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Mean</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QSlider" name="slider4">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>40</y>
-       <width>31</width>
-       <height>221</height>
-      </rect>
-     </property>
-     <property name="minimum">
-      <number>0</number>
-     </property>
-     <property name="maximum">
-      <number>1000</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_10">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>270</y>
-       <width>71</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Variance</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="slider4_counter">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>10</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tab_3">
-    <attribute name="title">
-     <string>Periodic</string>
-    </attribute>
-    <widget class="QLabel" name="slider5_counter">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>30</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_11">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>290</y>
-       <width>71</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Amplitude</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="apply_button_2">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>290</y>
-       <width>93</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Apply Filter</string>
-     </property>
-    </widget>
-    <widget class="QSlider" name="slider5">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>60</y>
-       <width>31</width>
-       <height>221</height>
-      </rect>
-     </property>
-     <property name="minimum">
-      <number>0</number>
-     </property>
-     <property name="maximum">
-      <number>1000</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="slider6_counter">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>30</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_12">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>290</y>
-       <width>71</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Theta 1</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QSlider" name="slider6">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>60</y>
-       <width>31</width>
-       <height>221</height>
-      </rect>
-     </property>
-     <property name="minimum">
-      <number>0</number>
-     </property>
-     <property name="maximum">
-      <number>1000</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_13">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>290</y>
-       <width>71</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Theta 2</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QSlider" name="slider7">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>60</y>
-       <width>31</width>
-       <height>221</height>
-      </rect>
-     </property>
-     <property name="minimum">
-      <number>0</number>
-     </property>
-     <property name="maximum">
-      <number>1000</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="slider7_counter">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>30</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_14">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>290</y>
-       <width>51</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Period</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="slider8_counter">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>30</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>1</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
-    <widget class="QSlider" name="slider8">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>60</y>
-       <width>31</width>
-       <height>221</height>
-      </rect>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="maximum">
-      <number>1000</number>
-     </property>
-     <property name="singleStep">
-      <number>1</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </widget>
-  </widget>
-  <widget class="QLabel" name="image_label">
-   <property name="geometry">
-    <rect>
-     <x>560</x>
-     <y>30</y>
-     <width>550</width>
-     <height>340</height>
-    </rect>
+   <property name="styleSheet">
+    <string notr="true">QFrame#frame{
+border-radius: 4px;
+border: 2px solid rgb(229, 229, 229);
+}</string>
    </property>
    <property name="frameShape">
-    <enum>QFrame::Box</enum>
+    <enum>QFrame::StyledPanel</enum>
    </property>
    <property name="frameShadow">
-    <enum>QFrame::Sunken</enum>
+    <enum>QFrame::Raised</enum>
    </property>
-   <property name="text">
-    <string/>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>401</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #FFF;
+font: 75 20pt &quot;Berlin Sans FB Demi&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Add Noise</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="close_button">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>20</y>
+      <width>17</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>17</width>
+      <height>17</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	border: none;
+	border-radius: 8px;
+	background-color: rgb(255, 0, 0);
+}
+
+QPushButton:hover {
+	background-color: rgba(255, 0, 0, 150);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="minimize_button">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>20</y>
+      <width>17</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>17</width>
+      <height>17</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	border: none;
+	border-radius: 8px;
+	background-color: rgb(255, 170, 0);
+}
+QPushButton:hover {
+background-color: rgba(255, 170, 0, 150);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="frame_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>1121</width>
+     <height>381</height>
+    </rect>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+   <property name="styleSheet">
+    <string notr="true">QFrame#frame_2{
+border-radius: 4px;
+border: 2px solid rgb(229, 229, 229);
+}</string>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="image_label">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>30</y>
+      <width>550</width>
+      <height>340</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabs">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>541</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string/>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Salt and Pepper</string>
+     </attribute>
+     <widget class="QSlider" name="slider2">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>40</y>
+        <width>31</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="slider2_counter">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>10</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="apply_button">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>290</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Apply Noise</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>270</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Salt Ratio</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="slider1_counter">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>10</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="slider1">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>40</y>
+        <width>31</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>270</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Noise Ratio</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Gaussian</string>
+     </attribute>
+     <widget class="QLabel" name="slider3_counter">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>10</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="apply_button_1">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>290</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Apply Noise</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="slider3">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>40</y>
+        <width>31</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>270</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Mean</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="slider4">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>40</y>
+        <width>31</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>1000</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>270</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Variance</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="slider4_counter">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>10</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Periodic</string>
+     </attribute>
+     <widget class="QLabel" name="slider5_counter">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>30</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>290</y>
+        <width>21</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>A</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="apply_button_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>290</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Apply Noise</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="slider5">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>60</y>
+        <width>31</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>300</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="slider6_counter">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>30</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>290</y>
+        <width>21</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>U</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="slider6">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>60</y>
+        <width>31</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>290</y>
+        <width>16</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>V</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="slider7">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>60</y>
+        <width>31</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="slider7_counter">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>30</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>290</y>
+        <width>16</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>T</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="slider8_counter">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>30</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>1</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="slider8">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>60</y>
+        <width>31</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>200</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>0</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 20px;</string>
+      </property>
+      <property name="text">
+       <string>Noise = A*Sin((ux + vy)/t)</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>
