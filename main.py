@@ -11,7 +11,6 @@ from gui.noiseAdd_ui import Ui_noiseAddDialog
 from gui.noiseRemove_ui import Ui_noiseRemoveDialog
 
 from backend.histogram import *
-from backend.fourier import *
 from backend.filters import *
 from backend.noise import *
 
@@ -19,6 +18,8 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import numpy as np
+import cv2 as cv
+
 
 #######################################################################
 
