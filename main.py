@@ -170,15 +170,15 @@ def updateHF():
 
 
 def equalizeHist():
-    global processed_Image
-    processed_Image = equalizeHistogram(getGrayImage(processed_Image))
-    update()
+    global processed_Image, underprocessing_Image
+    underprocessing_Image = equalizeHistogram(getGrayImage(processed_Image))
+    applyChanges()
 
 
 def convertToGray():
-    global processed_Image
-    processed_Image = getGrayImage(processed_Image)
-    update()
+    global processed_Image, underprocessing_Image
+    underprocessing_Image = getGrayImage(processed_Image)
+    applyChanges()
 
 
 def saveImage():
@@ -290,7 +290,8 @@ def applyChanges():
     ui.undo_Button.setEnabled(True)
     processed_Image = underprocessing_Image.copy()
     update()
-    activeDialog.close()
+    if activeDialog is not None:
+        activeDialog.close()
 
 def undoChanges():
     global processed_Image, underprocessing_Image
