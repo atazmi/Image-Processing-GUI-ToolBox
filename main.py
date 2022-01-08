@@ -122,6 +122,7 @@ def loadImage(init = False):
     if init is False:
         img_path = QFileDialog.getOpenFileName(filter="Image (*.jpg *.png *.jpeg *.tif *.jfif)")[0]
         if img_path != '':
+            reset()
             original_Image = processed_Image = cv.imread(img_path)
     else:
         original_Image = processed_Image = cv.imread('images\placeholder.jpg')
@@ -130,8 +131,11 @@ def loadImage(init = False):
 def reset():
     global original_Image, processed_Image
     processed_Image = original_Image
+    undo.clear()
+    redo.clear()
+    ui.undo_Button.setEnabled(False)
+    ui.redo_Button.setEnabled(False)
     update()
-
 
 def update():
     updateImages()
