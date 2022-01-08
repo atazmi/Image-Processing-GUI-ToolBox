@@ -1,3 +1,4 @@
-
+backend/__pycache__/*.pyc
+gui/__pycache__/*
 gui/generate_ui.bat
 *.pyc
