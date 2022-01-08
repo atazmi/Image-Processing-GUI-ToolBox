@@ -454,7 +454,7 @@ border: 2px solid rgb(229, 229, 229);
        <number>0</number>
       </property>
       <property name="maximum">
-       <number>100</number>
+       <number>1000</number>
       </property>
       <property name="singleStep">
        <number>1</number>
@@ -606,7 +606,7 @@ border: 2px solid rgb(229, 229, 229);
        <number>0</number>
       </property>
       <property name="maximum">
-       <number>100</number>
+       <number>1000</number>
       </property>
       <property name="singleStep">
        <number>1</number>
@@ -884,6 +884,9 @@ border: 2px solid rgb(229, 229, 229);
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_preview">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>270</x>

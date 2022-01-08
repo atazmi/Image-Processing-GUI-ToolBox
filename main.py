@@ -378,8 +378,8 @@ def updateNoiseRemove():
     slider3 = activeDialog.ui.slider3.value()
 
     slider4 = activeDialog.ui.slider4.value()
-    slider5 = activeDialog.ui.slider5.value() / 100.0
-    slider6 = activeDialog.ui.slider6.value() / 100.0
+    slider5 = activeDialog.ui.slider5.value() 
+    slider6 = activeDialog.ui.slider6.value() 
 
     slider7 = activeDialog.ui.slider7.value()
 

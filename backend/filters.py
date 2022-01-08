@@ -5,7 +5,19 @@ from .fourier import shifted_dft, dft_magnitude, inverse_shifted_dft
 
 
 def gaussianFilter(image, size=5, sigmaX=0, sigmaY=0):
-    return cv2.GaussianBlur(image, (size, size), sigmaX=0, sigmaY=0)
+    """
+    Takes an image and kernel size and sigma for X and Y directions
+    and applies a guissian filter and returns the image.
+
+    Inputs:
+        - img: A numpy array of shape (H, W, C) containing the image.
+        - size: an integer representing kernel size (default value = 5).
+        - sigmaX: an integer representing varience in X direction (default value =0).
+        - sigmaY: an integer representing varience in Y direction (default value =0).
+    Returns:
+        - image: a numpy array of shape (H, W, C) containing the image after applying the filter.
+    """
+    return cv2.GaussianBlur(image, (size, size), sigmaX=sigmaX, sigmaY=sigmaY)
 
 
 def sobel_filter(image, ksize=3, dx=1, dy=0):

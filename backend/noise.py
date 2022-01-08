@@ -2,11 +2,17 @@ import numpy as np
 
 
 def gaussianNoise(image, mean=0, var=0.001):
-    ''' 
-                 Add Gaussian noise
-                 Mean: mean 
-                 Var: Variance
-    '''
+    """
+    Takes an image and gussian noise to it with the defined mean and variance.
+
+    Inputs:
+        - image: A numpy array of any shape containing the image.
+        - mean: The mean of the added noise
+        - var: The variance of the added noise
+
+    Returns:
+        - Image: a numpy array containing the image after adding the gaussian noise.
+    """
     image = np.array(image / 255, dtype=float)
     noise = np.random.normal(mean, var ** 0.5, image.shape)
     out = image + noise
